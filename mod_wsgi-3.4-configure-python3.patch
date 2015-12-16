@@ -1,0 +1,13 @@
+cat ../SOURCES/mod_wsgi-3.4-configure-python3.patch 
+
+--- mod_wsgi-3.4/configure.orig	2013-09-13 10:31:54.590321835 +0200
++++ mod_wsgi-3.4/configure	2013-09-13 10:32:15.278494848 +0200
+@@ -1828,7 +1828,7 @@
+     LDFLAGS1="-L${PYTHONLIBDIR}"
+     LDFLAGS2="-L${PYTHONCFGDIR}"
+ 
+-    LDLIBS1="-lpython${PYTHON_VERSION}"
++    LDLIBS1="-lpython${PYTHON_VERSION}m"
+     LDLIBS2=`${PYTHON} -c 'from sys import stdout; \
+         from distutils import sysconfig; \
+         stdout.write(sysconfig.get_config_var("LIBS"))'`
