@@ -19,19 +19,14 @@
 %endif
 
 Name:           %{?scl:%scl_prefix}mod_wsgi
-Version:        3.4
-Release:        12.sc1%{?dist}
+Version:        4.5.13
+Release:        1%{?dist}
 Summary:        A WSGI interface for Python web applications in Apache
 Group:          System Environment/Libraries
 License:        ASL 2.0
-URL:            http://modwsgi.org
-Source0:        http://modwsgi.googlecode.com/files/mod_wsgi-%{version}.tar.gz
+URL:            https://modwsgi.readthedocs.io/
+Source0:        https://files.pythonhosted.org/packages/source/m/%{name}/mod_wsgi-%{version}.tar.gz
 Source1:        wsgi.conf
-Patch0:         mod_wsgi-3.4-connsbh.patch
-Patch1:         mod_wsgi-3.4-procexit.patch
-Patch2:         mod_wsgi-3.4-coredump.patch
-Patch3:         mod_wsgi-3.4-configure-python3.patch
-Patch4:         mod_wsgi-3.4-CVE-2014-0240.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  %{?scl:httpd24-}httpd-devel, %{?scl:%scl_prefix}python-devel, autoconf
 %if 0%{?scl:1}
@@ -58,15 +53,6 @@ existing WSGI adapters for mod_python or CGI.
 
 %prep
 %setup -q -n mod_wsgi-%{version}
-%patch0 -p1 -b .connsbh
-%patch1 -p1 -b .procexit
-%patch2 -p1 -b .coredump
-
-%if %{use_python3}
-%patch3 -p1 -b .python3
-%endif
-
-%patch4 -p1 -b .cve0240
 
 %build
 %if 0%{?scl:1}
@@ -122,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc LICENCE README
+%doc LICENSE CREDITS.rst README.rst
 %if 0%{?scl:1}
 %config(noreplace) %{_httpd24_modconfdir}/*.conf
 %{_httpd24_moddir}/mod_%{scl_prefix}wsgi.so
@@ -133,7 +119,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Thu Jun 05 2014 Jan Kaluza <jkaluza@redhat.com> - 3.4.12
+* Fri Jan 13 2017 Joe Orton <jorton@redhat.com> - 4.5.13-1
+- update to 4.5.13 (#1413063)
+
+* Thu Jun 05 2014 Jan Kaluza <jkaluza@redhat.com> - 3.4.13
 - fix for CVE-2014-0240 (#1104698)
 
 * Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 3.4-11
