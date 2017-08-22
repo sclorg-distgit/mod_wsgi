@@ -18,8 +18,8 @@
 %endif
 
 Name:           %{?scl:%scl_prefix}%{srcname}
-Version:        4.5.13
-Release:        1%{?dist}
+Version:        4.5.17
+Release:        2%{?dist}
 Summary:        A WSGI interface for Python web applications in Apache
 Group:          System Environment/Libraries
 License:        ASL 2.0
@@ -125,6 +125,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Aug 08 2017 Charalampos Stratakis <cstratak@redhat.com> - 4.5.17-2
+- Update to 4.5.17
+Resolves: rhbz#1479380
+
 * Fri Jun 16 2017 Tomas Orsava <torsava@redhat.com> - 4.5.13-1
 - Updated to the latest Fedora version 4.5.13
 
